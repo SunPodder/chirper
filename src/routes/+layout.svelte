@@ -1,13 +1,13 @@
 <script>
 	import Sidenav from '$lib/components/Sidenav.svelte';
-import Topbar from '$lib/components/Topbar.svelte';
+	import Topbar from '$lib/components/Topbar.svelte';
 	import '../app.postcss';
 </script>
 
-<div class="h-screen w-screen ">
+<div class="h-screen w-screen">
 	<Topbar />
 	<div class="flex">
-        <Sidenav />
-        <slot />
-    </div>
+		<Sidenav />
+		<slot />
+	</div>
 </div>
