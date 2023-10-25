@@ -8,29 +8,35 @@
 
 </script>
 
+<style>
+    li {
+        @apply p-3 flex gap-4;
+    }
+</style>
+
 <div>
-    <ul class="p-6 flex flex-col gap-12 mt-10 ml-4">
-        <li class="flex gap-4">
+    <ul class="p-6 flex flex-col min-w-[213px]">
+        <li>
             <img src="{home}" alt="">
             <span>Home</span>
         </li>
-        <li class="flex gap-4">
+        <li>
             <img src="{search}" alt="">
             <span>Search</span>
         </li>
-        <li class="flex gap-4">
+        <li>
             <img src="{activity}" alt="">
             <span>Activity</span>
         </li>
-        <li class="flex gap-4">
+        <li>
             <img src="{create}" alt="">
             <span>Create Chirp</span>
         </li>
-        <li class="flex gap-4">
+        <li>
             <img src="{communities}" alt="">
             <span>Communities</span>
         </li>
-        <li class="flex gap-4">
+        <li>
             <img src="{profile}" alt="">
             <span>Profile</span>
         </li>
