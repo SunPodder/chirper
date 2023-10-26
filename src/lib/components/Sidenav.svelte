@@ -10,13 +10,13 @@
 
 <style>
     li {
-        @apply p-3 flex gap-4;
+        @apply px-3 py-4 flex gap-4 rounded-lg cursor-pointer;
     }
 </style>
 
 <div>
-    <ul class="p-6 flex flex-col min-w-[213px]">
-        <li>
+    <ul class="p-6 flex flex-col min-w-[213px] gap-6">
+        <li class="bg-purple-500">
             <img src="{home}" alt="">
             <span>Home</span>
         </li>

@@ -15,12 +15,12 @@
         <div class="font-bold">
             {name}
         </div>
-        <div class="font-thin">
+        <div class="text-gray-400">
             {username}
         </div>
     </div>
-    <div class="ml-10">
-        <button class="px-4 py-2 bg-violet-500 rounded-lg text-sm">
+    <div class="ml-auto">
+        <button class="px-4 py-2 bg-violet-500 rounded-lg text-sm font-semibold">
             Follow
         </button>
     </div>
