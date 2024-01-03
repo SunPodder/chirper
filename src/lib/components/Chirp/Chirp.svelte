@@ -1,11 +1,17 @@
 <script>
 	import * as Avatar from '$lib/components/ui/avatar';
 	import heart from '$lib/assets/heart-gray.svg';
+	import heart_filled from '$lib/assets/heart-filled.svg';
 	import comment from '$lib/assets/reply.svg';
 	import share from '$lib/assets/share.svg';
 	import repost from '$lib/assets/repost.svg';
 
-	// @type {import("Chirp")}
+	let liked = false;
+
+	function toggleLike() {
+		liked = !liked;
+	}
+
 	export let chirp = {};
 </script>
 
@@ -25,8 +31,8 @@
 			{chirp.content}
 		</div>
 		<div class="mt-4 flex gap-3">
-			<button>
-				<img src={heart} alt="" />
+			<button on:click={toggleLike}>
+				<img src={liked ? heart_filled : heart} alt="" />
 			</button>
 			<button>
 				<img src={comment} alt="" />
