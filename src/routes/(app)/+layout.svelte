@@ -1,7 +1,7 @@
 <script>
 	import Sidenav from '$lib/components/Sidenav/Sidenav.svelte';
 	import Topbar from '$lib/components/Topbar.svelte';
-	import '../app.postcss';
+	import '../../app.postcss';
 </script>
 
 <div class="h-screen w-screen">

@@ -27,13 +27,21 @@
 					avatar: 'https://github.com/shadcn.png'
 				},
 				id: 'jdubwi'
-			}
+			},
+			{
+				user: {
+					name: 'Shad CN',
+					username: 'shadcn',
+					avatar: 'https://github.com/shadcn.png'
+				},
+				id: 'jdubwi'
+			},
 		]
 	});
 </script>
 
-<div class="flex w-screen">
-	<div class="min-w-[420px] flex-grow p-4 ml-8">
+<div class="flex w-full">
+	<div class="flex-grow p-4 ml-8">
 		<h1 class="text-4xl font-medium">Home</h1>
 		<div class="p-4 mt-10 flex flex-col gap-20">
 			{#each chirps as chirp}
@@ -41,7 +49,7 @@
 			{/each}
 		</div>
 	</div>
-	<div class="p-4 mr-4 min-w-[400px] hidden md:block">
+	<div class="p-4 mr-4 w-1/5 hidden md:block">
 		<div>
 			<h2 class="font-medium text-lg">Suggested Communities</h2>
 			<Suggestions />
