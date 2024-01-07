@@ -8,6 +8,9 @@
 	import Item from './Item.svelte';
 
 	let className = '';
+	let user = {
+		username: 'SunPodder',
+	}
 	export { className as class };
 </script>
 
@@ -17,5 +20,5 @@
 	<Item href="/activity" icon={activity}>Activity</Item>
 	<Item href="/create" icon={create}>Create Chirp</Item>
 	<Item href="/communities" icon={communities}>Communities</Item>
-	<Item href="/profile" icon={profile}>Profile</Item>
+	<Item href="/@{user.username}" icon={profile}>Profile</Item>
 </ul>
