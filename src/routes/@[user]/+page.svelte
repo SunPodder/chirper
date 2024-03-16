@@ -3,6 +3,10 @@
 	$: profile = data.profile;
 </script>
 
+<svelte:head>
+	<title>{profile.name} (@{profile.username}) | Chirper</title>
+</svelte:head>
+
 <div class="w-full px-8 ml-4">
 	<div class="relative">
 		<div>

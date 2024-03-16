@@ -40,6 +40,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Home | Chirper</title>
+</svelte:head>
+
 <div class="flex w-full">
 	<div class="flex-grow p-4 ml-8">
 		<h1 class="text-4xl font-medium">Home</h1>
