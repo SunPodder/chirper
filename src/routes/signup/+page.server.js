@@ -38,7 +38,7 @@ export const actions = {
 			return { error: e.message };
 		}
 
-		cookies.set('session', sessionId);
-		throw redirect(303, '/');
+		cookies.set('session', sessionId, { path: '/' });
+		redirect(303, '/');
 	}
 };

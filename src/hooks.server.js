@@ -19,7 +19,7 @@ export async function handle({ event, resolve }) {
 
 	if (!event.locals.user && event.url.pathname !== '/login' && event.url.pathname !== '/signup') {
 		event.cookies.set('session', '', { path: '/' });
-		throw redirect(302, '/signup?redirect=' + event.url.pathname);
+		redirect(302, '/signup?redirect=' + event.url.pathname);
 	}
 
 	event.locals.db = db;
