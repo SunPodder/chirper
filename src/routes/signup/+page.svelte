@@ -3,8 +3,11 @@
 	import logo from '$lib/assets/logo.svg';
 
 	export let form;
-	$: console.log(form);
 </script>
+
+<svelte:head>
+	<title>Sign Up | Chirper</title>
+</svelte:head>
 
 <div class="w-full mt-32 flex flex-col items-center justify-center gap-4">
 	<img src={logo} alt="" width="140" />
@@ -29,15 +32,7 @@
 			placeholder="Password"
 			class="w-full rounded-lg p-2 border-gray border-[1px] bg-transparent focus:outline-none"
 		/>
-		<button class="w-full bg-gray-100 text-black rounded-lg p-2"> Sign in with Email </button>
+		<button class="w-full bg-gray-100 text-black rounded-lg p-2"> Sign up </button>
 	</form>
-	<!-- 
-	<div class="text-center">Or continue with</div>
-	<div class="">
-		<button class="rounded-lg p-2 border-gray border-[1px] flex justify-center w-[280px]">
-			<Icon icon="akar-icons:github-fill" class="w-5 h-5" />
-			Github
-		</button>
-	</div> -->
 	<div>By clicking continue, you agree to our Terms of Service and Privacy Policy .</div>
 </div>

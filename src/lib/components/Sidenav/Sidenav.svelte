@@ -7,16 +7,22 @@
 	import profile from '$lib/assets/user.svg';
 	import Item from './Item.svelte';
 	import { page } from '$app/stores';
+	import { pushState } from '$app/navigation';
 
 	let className = '';
 	export { className as class };
+
+	async function showCreatePage(e){
+		// e.preventDefault();
+		// pushState('/create', {create: true});
+	}
 </script>
 
 <ul class="p-6 flex flex-col gap-6 {className}">
 	<Item href="/" icon={home}>Home</Item>
 	<Item href="/search" icon={search}>Search</Item>
 	<Item href="/activity" icon={activity}>Activity</Item>
-	<Item href="/create" icon={create}>Create Chirp</Item>
+	<Item href="/create" icon={create} onClick={showCreatePage}>Create Chirp</Item>
 	<Item href="/communities" icon={communities}>Communities</Item>
 	<Item href="/@{$page.data.user.username}" icon={profile}>Profile</Item>
 </ul>
