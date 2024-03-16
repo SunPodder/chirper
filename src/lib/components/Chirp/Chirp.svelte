@@ -22,7 +22,9 @@
 			<Avatar.Image src={chirp.user.avatar} alt={chirp.user.username} />
 			<Avatar.Fallback>{chirp.user.name}</Avatar.Fallback>
 		</Avatar.Root>
-		<div class="flex-grow w-[2px] bg-gray-700" />
+		{#if !chirp.comments.length == 0}
+			<div class="flex-grow w-[2px] bg-gray-700" />
+		{/if}
 	</div>
 	<div class="ml-4">
 		<div class="font-bold">
@@ -51,5 +53,5 @@
 	</div>
 </div>
 {#if commentEnabled}
-	<Comment class="mt-4" />
+	<Comment class="mt-4" chirpId={chirp.id} />
 {/if}

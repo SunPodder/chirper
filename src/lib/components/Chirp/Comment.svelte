@@ -1,19 +1,17 @@
 <script>
+	import { enhance } from '$app/forms';
+	import { page } from '$app/stores';
 	import * as Avatar from '$lib/components/ui/avatar';
 	import Icon from '@iconify/svelte';
 
-	let user = {
-		name: 'Sun Podder',
-		username: 'SunPodder',
-		avatar: 'https://github.com/SunPodder.png'
-	};
-
 	let className = '';
+	$: user = $page.data.user;
 
+	export let chirpId = '';
 	export { className as class };
 </script>
 
-<form action="/" class="max-w-[580px] {className}">
+<form method="POST" action="/create?/comment" class="max-w-[580px] {className}" use:enhance>
 	<div class="flex">
 		<div class="flex w-10 items-center flex-col mt-[-15px]">
 			<div class="w-[2px] h-[22px] bg-gray-700" />
@@ -23,7 +21,10 @@
 			</Avatar.Root>
 		</div>
 		<div class="w-full">
+			<input type="hidden" name="chirpId" value={chirpId}>
+			<!-- svelte-ignore a11y-autofocus -->
 			<textarea
+				name="comment"
 				autofocus="true"
 				id="message"
 				rows="2"
