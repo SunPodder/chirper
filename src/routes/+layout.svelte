@@ -8,9 +8,9 @@
 <div class="h-screen w-screen">
 	<Topbar />
 	<div class="sm:flex">
-        {#if $page.data.user}
-            <Sidenav class="w-full sm:w-1/2 md:w-1/3 lg:w-1/6" />
-        {/if}
+		{#if $page.data.user}
+			<Sidenav class="w-full sm:w-1/2 md:w-1/3 lg:w-1/6" />
+		{/if}
 		<slot />
 	</div>
 </div>

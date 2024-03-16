@@ -1,6 +1,6 @@
 // See https://kit.svelte.dev/docs/types#app
 
-import type { Surreal } from "surrealdb.js";
+import type { Surreal } from 'surrealdb.js';
 
 // for information about these interfaces
 declare global {

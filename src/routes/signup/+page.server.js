@@ -17,7 +17,6 @@ export const actions = {
 		if (Object.keys(errors).length) {
 			return fail(400, { error: errors });
 		}
-		
 
 		data = {
 			...data,

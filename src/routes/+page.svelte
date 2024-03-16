@@ -35,7 +35,7 @@
 					avatar: 'https://github.com/shadcn.png'
 				},
 				id: 'jdubwi'
-			},
+			}
 		]
 	});
 </script>

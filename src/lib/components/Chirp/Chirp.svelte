@@ -31,7 +31,7 @@
 		<div class="mt-2">
 			{chirp.content}
 		</div>
-		<ActionButtons onComment={() => commentEnabled = !commentEnabled} />
+		<ActionButtons onComment={() => (commentEnabled = !commentEnabled)} />
 	</div>
 </div>
 
@@ -46,10 +46,10 @@
 			{/if}
 		{/each}
 	</div>
-    <div class="text-xs flex items-center text-gray-500 ml-4">
-        {chirp.comments.length} replies
-    </div>
+	<div class="text-xs flex items-center text-gray-500 ml-4">
+		{chirp.comments.length} replies
+	</div>
 </div>
 {#if commentEnabled}
-	<Comment class="mt-4"/>
+	<Comment class="mt-4" />
 {/if}

@@ -1,8 +1,8 @@
 <script>
 	import Chirp from './Chirp.svelte';
-    export let chirp = {};
+	export let chirp = {};
 </script>
 
 <div>
-    <Chirp chirp={chirp} />
+	<Chirp {chirp} />
 </div>
