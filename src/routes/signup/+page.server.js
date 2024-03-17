@@ -20,7 +20,7 @@ export const actions = {
 
 		data = {
 			...data,
-			name: data.username,
+			name: `${data.first_name} ${data.last_name}`,
 			avatar: `https://api.dicebear.com/7.x/lorelei/jpg?seed=${data.username}`,
 			cover: `https://picsum.photos/seed/${data.username}/800/300`,
 			bio: '',
@@ -29,16 +29,15 @@ export const actions = {
 			posts: 0,
 			address: ''
 		};
-		let sessionId = generateId();
 
 		try {
 			await locals.db.create(`user:${data.username}`, data)[0];
-			await locals.db.create(`session:${sessionId}`, { user: 'user:' + data.username });
+			let sessionId = (await locals.db.create(`session`, { user: 'user:' + data.username }))[0];
+			cookies.set('session', sessionId.id, { path: '/' });
 		} catch (e) {
 			return { error: e.message };
 		}
 
-		cookies.set('session', sessionId, { path: '/' });
 		redirect(303, '/');
 	}
 };

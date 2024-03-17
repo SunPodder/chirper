@@ -13,13 +13,14 @@ export async function handle({ event, resolve }) {
 	let sessionId = event.cookies.get('session');
 
 	if (sessionId) {
-		let user = (await db.query(`SELECT * FROM session:${sessionId}.user`))[0][0];
+		let user = (await db.query(`SELECT * FROM ${sessionId}.user`))[0][0];
 		event.locals.user = user;
 	}
 
 	if (!event.locals.user && event.url.pathname !== '/login' && event.url.pathname !== '/signup') {
 		event.cookies.set('session', '', { path: '/' });
-		redirect(302, `/signup?redirect=${event.url.pathname}`);
+		let redirectUrl = event.url.pathname == '/' ? '' : `?redirect=${event.url.pathname}`;
+		return redirect(302, `/login${redirectUrl}`);
 	}
 
 	event.locals.db = db;
