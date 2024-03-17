@@ -19,10 +19,12 @@
 			<div class="font-bold text-4xl">
 				{profile.name} <span class="text-gray-400 text-lg">@{profile.username}</span>
 			</div>
-			<div class="ml-auto">
-				<button class="bg-purple-500 text-white px-4 py-2 rounded-md">Follow</button>
-				<button class="border border-gray-600 text-gray-200 px-4 py-2 rounded-md">Message</button>
-			</div>
+			{#if profile.id !== data.user.id}
+				<div class="ml-auto">
+					<button class="bg-purple-500 text-white px-4 py-2 rounded-md">Follow</button>
+					<button class="border border-gray-600 text-gray-200 px-4 py-2 rounded-md">Message</button>
+				</div>
+			{/if}
 		</div>
 		<div class="flex ml-1">
 			<div class="text-gray-300 text-lg mr-8">

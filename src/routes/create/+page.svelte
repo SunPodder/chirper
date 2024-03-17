@@ -29,7 +29,7 @@
 				id="message"
 				rows="5"
 				class="block p-2.5 w-full rounded-lg bg-transparent focus:outline-none text-2xl"
-				placeholder="What's on your mind, {data.user.name}?"
+				placeholder="What's on your mind, {data.user.first_name}?"
 			/>
 			<div class="flex mt-2 items-center gap-3">
 				<button>
