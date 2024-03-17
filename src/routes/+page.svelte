@@ -1,5 +1,5 @@
 <script>
-	import { ChirpBlock } from '$lib/components/Chirp';
+	import Chirp from '$lib/components/Chirp/Chirp.svelte';
 	import { Suggestions } from '$lib/components/Suggestions';
 
 	export let data;
@@ -12,9 +12,9 @@
 <div class="flex w-full">
 	<div class="flex-grow p-4 ml-8">
 		<h1 class="text-4xl font-medium">Home</h1>
-		<div class="p-4 mt-10 flex flex-col gap-20">
+		<div class="p-4 max-h-full mt-10 flex flex-col gap-16">
 			{#each data.chirps as chirp}
-				<ChirpBlock {chirp} />
+				<Chirp {chirp} />
 			{/each}
 		</div>
 	</div>
