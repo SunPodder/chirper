@@ -25,7 +25,7 @@
 		</div>
 		<div class="mt-12">
 			<h2 class="font-medium text-lg">Similar Minds</h2>
-			<Suggestions />
+			<Suggestions suggestions={data.suggestedUsers} />
 		</div>
 	</div>
 </div>
