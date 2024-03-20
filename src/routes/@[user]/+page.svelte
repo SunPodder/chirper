@@ -35,15 +35,15 @@
 	<div class="mt-8">
 		<div class="flex w-4/12">
 			<div class="mr-8 flex-grow flex items-center flex-col">
-				<div class="font-bold text-2xl">{profile.followers}</div>
+				<div class="font-bold text-2xl">{profile.followers.length}</div>
 				<div class="text-gray-400">Followers</div>
 			</div>
 			<div class="mr-8 flex-grow flex items-center flex-col">
-				<div class="font-bold text-2xl">{profile.following}</div>
+				<div class="font-bold text-2xl">{profile.following.length}</div>
 				<div class="text-gray-400">Following</div>
 			</div>
 			<div class="mr-8 flex-grow flex items-center flex-col">
-				<div class="font-bold text-2xl">{profile.posts}</div>
+				<div class="font-bold text-2xl">{profile.posts.length}</div>
 				<div class="text-gray-400">Posts</div>
 			</div>
 		</div>

@@ -19,20 +19,25 @@ export const actions = {
 		}
 
 		data = {
-			...data,
+			username: data.username,
+			password: data.password,
+			first_name: data.first_name,
+			last_name: data.last_name,
 			name: `${data.first_name} ${data.last_name}`,
 			avatar: `https://api.dicebear.com/7.x/lorelei/jpg?seed=${data.username}`,
 			cover: `https://picsum.photos/seed/${data.username}/800/300`,
 			bio: '',
-			followers: 0,
-			following: 0,
-			posts: 0,
-			address: ''
+			followers: [],
+			following: [],
+			posts: [],
+			address: {}
 		};
 
 		try {
-			await locals.db.create(`user:${data.username}`, data)[0];
-			let sessionId = (await locals.db.create(`session`, { user: 'user:' + data.username }))[0];
+			let user = (await locals.db.create(`user:${data.username}`, data))[0];
+			if (!user) return { error: 'User already exists' };
+
+			let sessionId = (await locals.db.create(`session`, { user: 'user:' + user.username }))[0];
 			cookies.set('session', sessionId.id, { path: '/' });
 		} catch (e) {
 			return { error: e.message };
