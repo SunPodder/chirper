@@ -1,4 +1,6 @@
 <script>
+	import Chirp from "$lib/components/Chirp/Chirp.svelte";
+
 	export let data;
 	$: profile = data.profile;
 </script>
@@ -43,9 +45,14 @@
 				<div class="text-gray-400">Following</div>
 			</div>
 			<div class="mr-8 flex-grow flex items-center flex-col">
-				<div class="font-bold text-2xl">{profile.posts.length}</div>
+				<div class="font-bold text-2xl">{data.chirps.length}</div>
 				<div class="text-gray-400">Posts</div>
 			</div>
 		</div>
+	</div>
+	<div class="p-4 max-h-full mt-16 flex flex-col gap-16">
+		{#each data.chirps as chirp}
+			<Chirp {chirp} />
+		{/each}
 	</div>
 </div>

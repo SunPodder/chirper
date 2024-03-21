@@ -29,7 +29,6 @@ export const actions = {
 			bio: '',
 			followers: [],
 			following: [],
-			posts: [],
 			address: {}
 		};
 
