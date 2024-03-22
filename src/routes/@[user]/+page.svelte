@@ -1,4 +1,5 @@
 <script>
+	import { enhance } from '$app/forms';
 	import Chirp from "$lib/components/Chirp/Chirp.svelte";
 
 	export let data;
@@ -8,6 +9,9 @@
 <svelte:head>
 	<title>{profile.name} (@{profile.username}) | Chirper</title>
 </svelte:head>
+
+<form action="?/follow" method="post" use:enhance id="followForm"></form>
+<form action="?/unfollow" method="post" use:enhance id="unfollowForm"></form>
 
 <div class="w-full px-8 ml-4">
 	<div class="relative">
@@ -23,7 +27,11 @@
 			</div>
 			{#if profile.id !== data.user.id}
 				<div class="ml-auto">
-					<button class="bg-purple-500 text-white px-4 py-2 rounded-md">Follow</button>
+					{#if profile.followers.includes(data.user.id)}
+						<button class="bg-purple-500 text-white px-4 py-2 rounded-md" type="submit" form="unfollowForm">Unfollow</button>
+					{:else}
+						<button class="bg-purple-500 text-white px-4 py-2 rounded-md" type="submit" form="followForm">Follow</button>
+					{/if}
 					<button class="border border-gray-600 text-gray-200 px-4 py-2 rounded-md">Message</button>
 				</div>
 			{/if}
