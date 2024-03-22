@@ -3,17 +3,19 @@
 
 	export let name = '',
 		username = '',
+		type = '',
+		cover = '',
 		avatar = '';
 </script>
 
 <div class="flex items-center gap-4 p-4">
 	<div>
 		<Avatar.Root>
-			<Avatar.Image src={avatar} alt="@{username}" />
+			<Avatar.Image src={avatar || cover} alt="@{username}" />
 			<Avatar.Fallback>{username.slice(0, 2)}</Avatar.Fallback>
 		</Avatar.Root>
 	</div>
-	<a href="/@{username}">
+	<a href="{type == 'user' ? `/@${username}` : `/community/${name}`}">
 		<div>
 			<div class="font-bold">
 				{name}

@@ -21,11 +21,11 @@
 	<div class="p-4 mr-4 w-1/5 hidden md:block">
 		<div>
 			<h2 class="font-medium text-lg">Suggested Communities</h2>
-			<Suggestions />
+			<Suggestions suggestions={data.suggestedCommunities} type="community" />
 		</div>
 		<div class="mt-12">
 			<h2 class="font-medium text-lg">Similar Minds</h2>
-			<Suggestions suggestions={data.suggestedUsers} />
+			<Suggestions suggestions={data.suggestedUsers} type="user" />
 		</div>
 	</div>
 </div>

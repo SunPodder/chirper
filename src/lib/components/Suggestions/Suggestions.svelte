@@ -1,6 +1,8 @@
 <script>
 	import SuggestionItem from './SuggestionItem.svelte';
 
+	export let type = '';
+
 	export let suggestions = [
 		{
 			name: 'Name',
@@ -24,7 +26,7 @@
 	<ul class="min-w-fit">
 		{#each suggestions as suggestion}
 			<li>
-				<SuggestionItem {...suggestion} />
+				<SuggestionItem {...suggestion} {type} />
 			</li>
 		{/each}
 	</ul>
