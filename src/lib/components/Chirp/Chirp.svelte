@@ -29,11 +29,15 @@
 		</div>
 		<div class="ml-4">
 			<div class="font-bold">
-				{chirp.user.name}
+				<a href="/@{chirp.user.username}">
+					{chirp.user.name}
+				</a>
 			</div>
-			<div class="mt-2">
-				{chirp.content}
-			</div>
+			<a href="/chirp/{chirp.id}">
+				<div class="mt-2">
+					{chirp.content}
+				</div>
+			</a>
 			<ActionButtons onComment={() => (commentEnabled = !commentEnabled)} />
 		</div>
 	</div>
