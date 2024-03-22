@@ -4,7 +4,8 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
-		"db": "surreal start -u admin -p admin",
+		"db:start": "surreal start -u admin -p admin",
+		"db:init": "node src/db/mock.data.js users chirps communities",
 		"build": "vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",

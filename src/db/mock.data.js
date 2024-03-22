@@ -50,6 +50,20 @@ async function createChirps(num) {
 	}
 }
 
+async function createCommunities(num){
+	for(let i = 0; i < num; i++){
+		let data = {
+			name: faker.company.name(),
+			description: faker.lorem.sentence(),
+			creator: `user:user${i}`,
+			members: [],
+			cover: 'https://picsum.photos/seed/community/800/300',
+		}
+		let community = await db.create(`community:${i}`, data);
+		console.info(`Created community ${i} with id ${community[0].id}`);
+	}
+}
+
 // get commandline arguments
 const args = process.argv.slice(2);
 
@@ -60,6 +74,9 @@ for (let arg of args) {
 			break;
 		case 'chirps':
 			createChirps(10);
+			break;
+		case 'communities':
+			createCommunities(10);
 			break;
 		default:
 			console.error('Invalid argument');

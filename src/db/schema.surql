@@ -40,8 +40,8 @@ DEFINE SCOPE IF NOT EXISTS user SESSION 1d
 			email: $email,
 			password: crypto::argon2::generate($password)
             name: $name,
-            avatar: $avatar,
-            cover: $cover,
+            avatar: string::concat('https://api.dicebear.com/7.x/lorelei/png?seed=', $username),
+            cover: string::concat('https://picsum.photos/seed/', $username,'/800/300'),
             bio: $bio,
             followers: $followers,
             following: $following,
@@ -63,3 +63,21 @@ DEFINE FIELD created_on ON chirp TYPE time VALUE time::now() READONLY;
 DEFINE FIELD author ON chirp TYPE record<string> VALUE $auth.id;
 DEFINE FIELD likes ON chirp TYPE array<record<string>>;
 DEFINE FIELD comments ON chirp FLEXIBLE TYPE array<object<string>>;
+
+
+
+DEFINE TABLE community SCHEMAFULL
+    PERMISSIONS
+        FOR select FULL
+        FOR update, delete WHERE creator.id = $auth.id;
+
+
+DEFINE FIELD creator ON community TYPE record<string> VALUE $auth.id;
+DEFINE FIELD name ON community TYPE string;
+DEFINE FIELD description ON community TYPE string;
+DEFINE FIELD members ON community TYPE array<record<string>>;
+DEFINE FIELD created_on ON community TYPE time VALUE time::now() READONLY;
+DEFINE FIELD cover ON community TYPE string DEFAULT 'https://picsum.photos/seed/community/800/300';
+
+DEFINE INDEX IF NOT EXISTS name ON community FIELDS name UNIQUE;
+
