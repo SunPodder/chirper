@@ -9,7 +9,9 @@ declare global {
 		interface Locals {
 			db: Surreal;
 		}
-		// interface PageData {}
+		interface PageData {
+			db: Surreal;
+		}
 		// interface Platform {}
 	}
 }

@@ -1,8 +1,41 @@
 <script>
 	import { enhance } from '$app/forms';
 	import logo from '$lib/assets/logo.svg';
+	import { User } from '$lib/stores/user.store.js';
 
 	export let form;
+	export let data;
+
+	let first_name = '';
+	let last_name = '';
+	let username = '';
+	let password = '';
+
+	async function signup() {
+		try {
+			let token = await data.db.signup(
+				{
+					name: {
+						first: first_name,
+						last: last_name
+					},
+					username,
+					password,
+					namespace: 'dev',
+					database: 'test',
+					scope: 'user'
+				},
+			);
+
+			document.cookie = `token=${token}; path=/; max-age=31536000`;
+
+			User.set(await data.db.info())
+
+			localStorage.setItem('token', token);
+		} catch (error) {
+			console.log(error);
+		}
+	}
 </script>
 
 <svelte:head>
@@ -12,27 +45,27 @@
 <div class="w-full mt-32 flex flex-col items-center justify-center gap-4">
 	<img src={logo} alt="" width="140" />
 	<h1 class="font-bold text-3xl text-center">Create an Account</h1>
-	<form method="POST" use:enhance class="flex flex-col gap-2 w-full items-center">
+	<form on:submit|preventDefault={signup} class="flex flex-col gap-2 w-full items-center">
 		<div>Enter your username to create your account</div>
 		{#if form?.error.username}
 			<div class="text-red-500">{form.error.username}</div>
 		{/if}
 		<div class="flex gap-2">
 			<input
-				name="first_name"
+				value={first_name}
 				type="text"
 				placeholder="First Name"
 				class="max-w-[9.5rem] rounded-lg p-2 border-gray border-[1px] bg-transparent focus:outline-none"
 			/>
 			<input
-				name="last_name"
+				value={last_name}
 				type="text"
 				placeholder="Last Name"
 				class="max-w-[9.5rem] rounded-lg p-2 border-gray border-[1px] bg-transparent focus:outline-none"
 			/>
 		</div>
 		<input
-			name="username"
+			value={username}
 			type="text"
 			placeholder="Username"
 			class="max-w-xs w-full rounded-lg p-2 border-gray border-[1px] bg-transparent focus:outline-none"
@@ -41,7 +74,7 @@
 			<div class="text-red-500">{form.error.password}</div>
 		{/if}
 		<input
-			name="password"
+			value={password}
 			type="password"
 			placeholder="Password"
 			class="max-w-xs w-full rounded-lg p-2 border-gray border-[1px] bg-transparent focus:outline-none"
