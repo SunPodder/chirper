@@ -1,4 +1,5 @@
 <script>
+	import { redirect } from '@sveltejs/kit';
 	import home from '$lib/assets/home.svg';
 	import search from '$lib/assets/search.svg';
 	import activity from '$lib/assets/heart.svg';
@@ -13,8 +14,8 @@
 	export { className as class };
 
 	async function showCreatePage(e){
-		// e.preventDefault();
-		// pushState('/create', {create: true});
+		e.preventDefault();
+		pushState('/create', {create: true, redirect: $page.url.pathname});
 	}
 </script>
 

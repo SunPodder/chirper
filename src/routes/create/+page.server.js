@@ -1,7 +1,7 @@
 import { redirect } from '@sveltejs/kit';
 
 export const actions = {
-	chirp: async function ({ locals, request, cookies }) {
+	chirp: async function ({ locals, request }) {
 		let data = Object.fromEntries(await request.formData());
 
 		try {
@@ -15,7 +15,7 @@ export const actions = {
 			console.error(error);
 		}
 
-		redirect(302, '/');
+		redirect(302, data.redirect == "undefined" ? '/' : data.redirect);
 	},
 	comment: async function ({ locals, request, cookies }) {
 		let data = Object.fromEntries(await request.formData());
