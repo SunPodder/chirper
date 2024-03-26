@@ -1,6 +1,6 @@
 <script>
 	import { enhance } from '$app/forms';
-	import Chirp from "$lib/components/Chirp/Chirp.svelte";
+	import Chirp from '$lib/components/Chirp/Chirp.svelte';
 
 	export let data;
 	$: profile = data.profile;
@@ -10,8 +10,8 @@
 	<title>{profile.name} (@{profile.username}) | Chirper</title>
 </svelte:head>
 
-<form action="?/follow" method="post" use:enhance id="followForm"></form>
-<form action="?/unfollow" method="post" use:enhance id="unfollowForm"></form>
+<form action="?/follow" method="post" use:enhance id="followForm" />
+<form action="?/unfollow" method="post" use:enhance id="unfollowForm" />
 
 <div class="w-full px-8 ml-4">
 	<div class="relative">
@@ -28,9 +28,17 @@
 			{#if profile.id !== data.user.id}
 				<div class="ml-auto">
 					{#if profile.followers.includes(data.user.id)}
-						<button class="bg-purple-500 text-white px-4 py-2 rounded-md" type="submit" form="unfollowForm">Unfollow</button>
+						<button
+							class="bg-purple-500 text-white px-4 py-2 rounded-md"
+							type="submit"
+							form="unfollowForm">Unfollow</button
+						>
 					{:else}
-						<button class="bg-purple-500 text-white px-4 py-2 rounded-md" type="submit" form="followForm">Follow</button>
+						<button
+							class="bg-purple-500 text-white px-4 py-2 rounded-md"
+							type="submit"
+							form="followForm">Follow</button
+						>
 					{/if}
 					<button class="border border-gray-600 text-gray-200 px-4 py-2 rounded-md">Message</button>
 				</div>
@@ -45,15 +53,19 @@
 	<div class="mt-8">
 		<div class="flex w-4/12">
 			<div class="mr-8 flex-grow flex items-center flex-col">
-				<div class="font-bold text-2xl">{profile.followers.length}</div>
-				<div class="text-gray-400">Followers</div>
+				<a href="/@{profile.username}/followers">
+					<div class="font-bold text-2xl text-center">{profile.followers.length}</div>
+					<div class="text-gray-400">Followers</div>
+				</a>
 			</div>
 			<div class="mr-8 flex-grow flex items-center flex-col">
-				<div class="font-bold text-2xl">{profile.following.length}</div>
-				<div class="text-gray-400">Following</div>
+				<a href="/@{profile.username}/following">
+					<div class="font-bold text-2xl text-center">{profile.following.length}</div>
+					<div class="text-gray-400">Following</div>
+				</a>
 			</div>
 			<div class="mr-8 flex-grow flex items-center flex-col">
-				<div class="font-bold text-2xl">{data.chirps.length}</div>
+				<div class="font-bold text-2xl text-center">{data.chirps.length}</div>
 				<div class="text-gray-400">Posts</div>
 			</div>
 		</div>
