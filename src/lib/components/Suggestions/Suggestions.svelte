@@ -26,7 +26,7 @@
 	<ul class="min-w-fit">
 		{#each suggestions as suggestion}
 			<li>
-				<SuggestionItem {...suggestion} {type} />
+				<SuggestionItem data={suggestion} {type} />
 			</li>
 		{/each}
 	</ul>
