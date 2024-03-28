@@ -5,7 +5,9 @@
 	"scripts": {
 		"dev": "vite dev",
 		"db:start": "surreal start -u admin -p admin",
-		"db:init": "node src/db/mock.data.js users chirps communities",
+		"db:docker": "docker run --rm --pull always -p 8000:8000 surrealdb/surrealdb:latest start",
+		"db:init": "cat src/db/schema.surql | surreal sql -u admin -p admin --ns dev --db test",
+		"db:seed": "node src/db/mock.data.js users chirps communities",
 		"build": "vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
