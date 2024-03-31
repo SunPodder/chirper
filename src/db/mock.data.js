@@ -57,7 +57,10 @@ async function createCommunities(num){
 			description: faker.lorem.sentence(),
 			creator: `user:user${i}`,
 			members: [],
-			cover: 'https://picsum.photos/seed/community/800/300',
+			cover: `https://picsum.photos/seed/community${i}/800/300`,
+			chirps: [
+				`chirp:${i}`
+			]
 		}
 		let community = await db.create(`community:${i}`, data);
 		console.info(`Created community ${i} with id ${community[0].id}`);
