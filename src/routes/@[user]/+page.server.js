@@ -32,6 +32,7 @@ export const actions = {
 		}
 
 		await locals.db.query(`UPDATE ${target.id} SET followers += ${locals.user.id}`);
+		await locals.db.query(`UPDATE ${locals.user.id} SET following += ${target.id}`);
 
 		return {
 			status: 200,
@@ -54,6 +55,7 @@ export const actions = {
 		}
 
 		await locals.db.query(`UPDATE ${target.id} SET followers -= ${locals.user.id}`);
+		await locals.db.query(`UPDATE ${locals.user.id} SET following -= ${target.id}`);
 
 		return {
 			status: 200,

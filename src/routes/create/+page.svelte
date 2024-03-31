@@ -16,11 +16,11 @@
 	<div class="w-full max-w-4xl">
 		<div class="flex">
 			<Avatar.Root class="w-14 h-14">
-				<Avatar.Image src={data.user.avatar} alt={data.user.username} />
-				<Avatar.Fallback>{data.user.name}</Avatar.Fallback>
+				<Avatar.Image src={$page.data.user.avatar} alt={$page.data.user.username} />
+				<Avatar.Fallback>{$page.data.user.name}</Avatar.Fallback>
 			</Avatar.Root>
 			<span class="bold text-4xl flex items-center px-4">
-				{data.user.name}
+				{$page.data.user.name}
 			</span>
 		</div>
 		<div class="w-full mt-4">
@@ -31,7 +31,7 @@
 				id="message"
 				rows="5"
 				class="block p-2.5 w-full rounded-lg bg-transparent focus:outline-none text-2xl"
-				placeholder="What's on your mind, {data.user.first_name}?"
+				placeholder="What's on your mind, {$page.data.user.first_name}?"
 			/>
 			<div class="flex mt-2 items-center gap-3">
 				<button>
