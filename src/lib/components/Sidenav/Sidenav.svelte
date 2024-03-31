@@ -24,6 +24,6 @@
 	<Item href="/search" icon={search}>Search</Item>
 	<Item href="/activity" icon={activity}>Activity</Item>
 	<Item href="/create" icon={create} onClick={showCreatePage}>Create Chirp</Item>
-	<Item href="/communities" icon={communities}>Communities</Item>
+	<Item href="/community" icon={communities}>Communities</Item>
 	<Item href="/@{$page.data.user.username}" icon={profile}>Profile</Item>
 </ul>
