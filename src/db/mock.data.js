@@ -12,58 +12,70 @@ await db.connect('http://127.0.0.1:8000/rpc', {
 
 async function createUsers(num) {
 	for (let i = 0; i < num; i++) {
-		let data = {
-			username: `user${i}`,
-			password: faker.internet.password(),
-			first_name: faker.person.firstName(),
-			last_name: faker.person.lastName(),
-			bio: '',
-			followers: [],
-			following: [],
-			address: {
-				street: faker.location.street(),
-				city: faker.location.city(),
-				state: faker.location.state(),
-				zip: faker.location.zipCode()
-			}
-		};
-
-		data.name = data.first_name + ' ' + data.last_name;
-		data.avatar = `https://api.dicebear.com/7.x/lorelei/jpg?seed=user${data.username}`;
-		data.cover = `https://picsum.photos/seed/user${data.username}/800/300`;
-
-		let user = await db.create(`user:${data.username}`, data);
-		console.info(`Created user ${i} with id ${user[0].id}`);
+		try {
+			let data = {
+				username: `user${i}`,
+				password: faker.internet.password(),
+				first_name: faker.person.firstName(),
+				last_name: faker.person.lastName(),
+				bio: '',
+				followers: [],
+				following: [],
+				address: {
+					street: faker.location.street(),
+					city: faker.location.city(),
+					state: faker.location.state(),
+					zip: faker.location.zipCode()
+				}
+			};
+	
+			data.name = data.first_name + ' ' + data.last_name;
+			data.avatar = `https://api.dicebear.com/7.x/lorelei/jpg?seed=user${data.username}`;
+			data.cover = `https://picsum.photos/seed/user${data.username}/800/300`;
+	
+			let user = await db.create(`user:${data.username}`, data);
+			console.info(`Created user ${i} with id ${user[0].id}`);
+		} catch (error) {
+			console.warn(error.message);
+		}
 	}
 }
 
 async function createChirps(num) {
 	for (let i = 0; i < num; i++) {
-		let data = {
-			user: `user:user${i}`,
-			content: `Chirp ${i}`,
-			likes: 0,
-			comments: []
-		};
-		let chirp = await db.create(`chirp:${i}`, data);
-		console.info(`Created chirp ${i} with id ${chirp[0].id}`);
+		try {
+			let data = {
+				author: `user:user${i}`,
+				content: `Chirp ${i}`,
+				likes: [],
+				comments: []
+			};
+			let chirp = await db.create(`chirp:${i}`, data);
+			console.info(`Created chirp ${i} with id ${chirp[0].id}`);
+		} catch (error) {
+			console.warn(error.message);
+		}
 	}
 }
 
 async function createCommunities(num){
 	for(let i = 0; i < num; i++){
-		let data = {
-			name: faker.company.name(),
-			description: faker.lorem.sentence(),
-			creator: `user:user${i}`,
-			members: [],
-			cover: `https://picsum.photos/seed/community${i}/800/300`,
-			chirps: [
-				`chirp:${i}`
-			]
+		try {
+			let data = {
+				name: faker.company.name(),
+				description: faker.lorem.sentence(),
+				creator: `user:user${i}`,
+				members: [],
+				cover: `https://picsum.photos/seed/community${i}/800/300`,
+				chirps: [
+					`chirp:${i}`
+				]
+			}
+			let community = await db.create(`community:${i}`, data);
+			console.info(`Created community ${i} with id ${community[0].id}`);
+		} catch (error) {
+			console.warn(error.message);
 		}
-		let community = await db.create(`community:${i}`, data);
-		console.info(`Created community ${i} with id ${community[0].id}`);
 	}
 }
 
