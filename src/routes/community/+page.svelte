@@ -9,8 +9,8 @@
 </svelte:head>
 
 <div class="w-full">
-	<h1>Communities</h1>
-	<ul>
+	<h1 class="text-4xl font-medium">Communities</h1>
+	<ul class="mt-6">
 		{#each data.communities as community}
 			<div class="flex items-center gap-4 p-4">
 				<div>

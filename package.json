@@ -6,7 +6,7 @@
 		"dev": "vite dev",
 		"db:start": "surreal start -u admin -p admin",
 		"db:docker": "docker run --rm --pull always -p 8000:8000 surrealdb/surrealdb:latest start",
-		"db:init": "cat src/db/schema.surql | surreal sql -u admin -p admin --ns dev --db test",
+		"db:init": "cat src/db/schema.surql | surreal sql -u admin -p admin --ns dev --db test --multi",
 		"db:seed": "node src/db/mock.data.js users chirps communities",
 		"build": "vite build",
 		"preview": "vite preview",

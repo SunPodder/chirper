@@ -29,16 +29,23 @@ export const actions = {
 			bio: '',
 			followers: [],
 			following: [],
-			address: {}
+			address: {},
 		};
 
 		try {
-			let user = (await locals.db.create(`user:${data.username}`, data))[0];
+			let token = await locals.db.signup({
+				scope: 'user',
+				database: 'test',
+				namespace: 'dev',
+				...data
+			});
+
+			let user = await locals.db.info();
 			if (!user) return { error: 'User already exists' };
 
-			let sessionId = (await locals.db.create(`session`, { user: 'user:' + user.username }))[0];
-			cookies.set('session', sessionId.id, { path: '/' });
+			cookies.set('session', token, { path: '/' });
 		} catch (e) {
+			console.log(e);
 			return { error: e.message };
 		}
 

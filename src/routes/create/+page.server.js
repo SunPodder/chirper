@@ -6,18 +6,16 @@ export const actions = {
 
 		try {
 			await locals.db.create('chirp', {
-				content: data.message,
-				user: locals.user.id,
-				likes: 0,
-				comments: []
+				content: data.message
 			});
+
 		} catch (error) {
 			console.error(error);
 		}
 
-		redirect(302, data.redirect == "undefined" ? '/' : data.redirect);
+		redirect(302, data.redirect == 'undefined' ? '/' : data.redirect);
 	},
-	comment: async function ({ locals, request, cookies }) {
+	comment: async function ({ locals, request }) {
 		let data = Object.fromEntries(await request.formData());
 		let comment = {
 			user: locals.user.id,

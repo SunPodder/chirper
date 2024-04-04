@@ -20,8 +20,8 @@
 	<div class="flex">
 		<div class="flex flex-col items-center">
 			<Avatar.Root class="w-10 h-10">
-				<Avatar.Image src={chirp.user.avatar} alt={chirp.user.username} />
-				<Avatar.Fallback>{chirp.user.name}</Avatar.Fallback>
+				<Avatar.Image src={chirp.author.avatar} alt={chirp.author.username} />
+				<Avatar.Fallback>{chirp.author.name}</Avatar.Fallback>
 			</Avatar.Root>
 			{#if !chirp.comments.length == 0}
 				<div class="flex-grow w-[2px] bg-gray-700" />
@@ -29,8 +29,8 @@
 		</div>
 		<div class="ml-4">
 			<div class="font-bold">
-				<a href="/@{chirp.user.username}">
-					{chirp.user.name}
+				<a href="/@{chirp.author.username}">
+					{chirp.author.name}
 				</a>
 			</div>
 			<a href="/chirp/{chirp.id}">

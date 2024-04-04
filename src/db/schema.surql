@@ -1,83 +1,89 @@
-// User Schema
-
-DEFINE TABLE IF NOT EXISTS user SCHEMAFULL
+DEFINE TABLE user SCHEMAFULL
 	PERMISSIONS
-        FOR update, delete WHERE id = $auth.id;
-
-// auth fields
-DEFINE FIELD IF NOT EXISTS email ON user TYPE string VALUE string::lowercase($value) ASSERT string::is::email($value)
-    PERMISSIONS FOR select WHERE id = $auth.id;
-DEFINE FIELD IF NOT EXISTS password ON user TYPE string
-    PERMISSIONS FOR select WHERE id = $auth.id;
-DEFINE FIELD IF NOT EXISTS created_on ON user VALUE time::now() READONLY
-    PERMISSIONS FOR select WHERE id = $auth.id;
-
-// info
-DEFINE FIELD IF NOT EXISTS username ON user TYPE string VALUE string::lowercase($value) ASSERT string::is::alphanumeric($value);
-DEFINE FIELD IF NOT EXISTS name ON user FLEXIBLE TYPE object;
-DEFINE FIELD IF NOT EXISTS avatar ON user TYPE string;
-DEFINE FIELD IF NOT EXISTS cover ON user TYPE string;
-
-// misc fields
-DEFINE FIELD IF NOT EXISTS bio ON user TYPE option<string>;
-DEFINE FIELD IF NOT EXISTS followers ON user TYPE array<record<string>>;
-DEFINE FIELD IF NOT EXISTS following ON user TYPE array<record<string>>;
-DEFINE FIELD IF NOT EXISTS address ON user FLEXIBLE TYPE object;
-
-DEFINE INDEX IF NOT EXISTS username ON user FIELDS username UNIQUE;
+        FOR select, update FULL
+        FOR delete WHERE $auth.id == id;
 
 
+DEFINE FIELD username ON user TYPE string VALUE string::lowercase($value) ASSERT string::is::alphanum($value)
+    PERMISSIONS FOR update WHERE $auth.id == id;
+DEFINE FIELD password ON user TYPE string
+    PERMISSIONS FOR select, update WHERE $auth.id == id;
 
-// User auth
 
-DEFINE SCOPE IF NOT EXISTS user SESSION 1d
+DEFINE FIELD name ON user TYPE string DEFAULT ''
+    PERMISSIONS FOR update WHERE $auth.id == id;
+DEFINE FIELD first_name ON user FLEXIBLE TYPE string
+    PERMISSIONS FOR update WHERE $auth.id == id;
+DEFINE FIELD last_name ON user FLEXIBLE TYPE string
+    PERMISSIONS FOR update WHERE $auth.id == id;
+DEFINE FIELD avatar ON user TYPE string DEFAULT ''
+    PERMISSIONS FOR update WHERE $auth.id == id;
+DEFINE FIELD cover ON user TYPE string DEFAULT ''
+    PERMISSIONS FOR update WHERE $auth.id == id;
+DEFINE FIELD bio ON user TYPE option<string>
+    PERMISSIONS FOR update WHERE $auth.id == id;
+DEFINE FIELD address ON user FLEXIBLE TYPE object DEFAULT {}
+    PERMISSIONS FOR update WHERE $auth.id == id;
+
+DEFINE FIELD followers ON user TYPE array<record<user>> DEFAULT [];
+DEFINE FIELD following ON user TYPE array<record<user>> DEFAULT [];
+DEFINE FIELD created_on ON user VALUE time::now() READONLY;
+
+DEFINE INDEX username ON user FIELDS username UNIQUE;
+
+
+DEFINE SCOPE user SESSION 1d
 	SIGNIN (
 		SELECT * FROM user WHERE email = $email AND crypto::argon2::compare(password, $password)
 	)
 	SIGNUP (
 		CREATE user CONTENT {
 			username: $username,
-			email: $email,
-			password: crypto::argon2::generate($password)
-            name: $name,
-            avatar: string::concat('https://api.dicebear.com/7.x/lorelei/png?seed=', $username),
+			password: crypto::argon2::generate($password),
+            name: string::concat($first_name, ' ', $last_name),
+            first_name: $first_name,
+            last_name: $last_name,
+            avatar: string::concat('https://api.dicebear.com/7.x/lorelei/jpg?seed=', $username),
             cover: string::concat('https://picsum.photos/seed/', $username,'/800/300'),
             bio: $bio,
-            followers: $followers,
-            following: $following,
+            followers: [],
+            following: [],
             address: $address
 		}
 	);
 
 
-
-// Chirp Schema
 DEFINE TABLE chirp SCHEMAFULL
     PERMISSIONS
+        FOR create WHERE $auth.id != NULL
         FOR select WHERE public = true
-        FOR update, delete WHERE id = $auth.id;
+        FOR update FULL
+        FOR delete WHERE author.id = $auth.id;
 
-DEFINE FIELD content ON chirp TYPE string;
-DEFINE FIELD public ON chirp TYPE boolean VALUE true;
-DEFINE FIELD created_on ON chirp TYPE time VALUE time::now() READONLY;
-DEFINE FIELD author ON chirp TYPE record<string> VALUE $auth.id;
-DEFINE FIELD likes ON chirp TYPE array<record<string>>;
-DEFINE FIELD comments ON chirp FLEXIBLE TYPE array<object<string>>;
+DEFINE FIELD content ON chirp TYPE string
+    PERMISSIONS FOR update WHERE $auth.id == author.id;
+DEFINE FIELD public ON chirp TYPE bool DEFAULT true
+    PERMISSIONS FOR update WHERE $auth.id == author.id;
+DEFINE FIELD created_on ON chirp VALUE time::now() READONLY;
+DEFINE FIELD author ON chirp TYPE record<user> VALUE $auth.id DEFAULT $auth.id READONLY;
+DEFINE FIELD likes ON chirp TYPE array<record<user>> DEFAULT [];
+DEFINE FIELD comments ON chirp FLEXIBLE TYPE array<object> DEFAULT [];
 
 
 
 DEFINE TABLE community SCHEMAFULL
     PERMISSIONS
-        FOR select FULL
-        FOR update, delete WHERE creator.id = $auth.id;
+        FOR create WHERE $auth.id != NULL
+        FOR select, update, delete FULL;
 
 
-DEFINE FIELD creator ON community TYPE record<string> VALUE $auth.id;
+DEFINE FIELD creator ON community TYPE record<user> DEFAULT $auth.id READONLY;
 DEFINE FIELD name ON community TYPE string;
 DEFINE FIELD description ON community TYPE string;
-DEFINE FIELD members ON community TYPE array<record<string>>;
-DEFINE FIELD created_on ON community TYPE time VALUE time::now() READONLY;
+DEFINE FIELD members ON community TYPE array<record<user>>;
+DEFINE FIELD created_on ON community VALUE time::now() READONLY;
 DEFINE FIELD cover ON community TYPE string DEFAULT 'https://picsum.photos/seed/community/800/300';
+DEFINE FIELD chirps ON community TYPE array<record<chirp>> DEFAULT [];
 
-DEFINE INDEX IF NOT EXISTS name ON community FIELDS name UNIQUE;
+DEFINE INDEX name ON community FIELDS name UNIQUE;
 

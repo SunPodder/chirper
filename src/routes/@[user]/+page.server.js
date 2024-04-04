@@ -2,8 +2,8 @@ import { error } from '@sveltejs/kit';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params, locals }) {
-	let user = (await locals.db.select(`user:${params.user}`))[0];
-	let chirps = (await locals.db.query(`SELECT * FROM chirp WHERE user = ${user.id} FETCH user, comments.user`))[0];
+	let user = (await locals.db.query(`SELECT * FROM user WHERE username = '${params.user}'`))[0][0];
+	let chirps = (await locals.db.query(`SELECT * FROM chirp WHERE author = ${user.id} FETCH author, comments.user`))[0];
 
 	if (!user) {
 		error(404, `User does not exist!`);
@@ -18,7 +18,7 @@ export async function load({ params, locals }) {
 
 export const actions = {
 	follow: async function({ locals, params }) {
-		let target = (await locals.db.select(`user:${params.user}`))[0];
+		let target = (await locals.db.query(`SELECT id, followers from user WHERE username = '${params.user}'`))[0][0];
 
 		if (!target) {
 			error(404, `User does not exist!`);
@@ -36,7 +36,7 @@ export const actions = {
 
 		return {
 			status: 200,
-			body: { message: `You are now following ${target.name}` }
+			body: { message: `You are now following ${target.id}` }
 		};
 	},
 

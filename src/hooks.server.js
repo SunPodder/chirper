@@ -5,20 +5,21 @@ export async function handle({ event, resolve }) {
 	const db = new Surreal();
 	await db.connect('http://127.0.0.1:8000/rpc', {
 		namespace: 'dev',
-		database: 'test',
-		username: 'admin',
-		password: 'admin'
+		database: 'test'
 	});
 
-	let sessionId = event.cookies.get('session');
+	let token = event.cookies.get('session');
 
-	if (sessionId) {
-		let user = (await db.query(`SELECT * FROM ${sessionId}.user`))[0][0];
-		event.locals.user = user;
+	if (token) {
+		try {
+			await db.authenticate(token);
+			event.locals.user = await db.info();
+		} catch (error) {
+			event.cookies.set('session', '', { path: '/' });
+		}
 	}
 
 	if (!event.locals.user && event.url.pathname !== '/login' && event.url.pathname !== '/signup') {
-		event.cookies.set('session', '', { path: '/' });
 		let redirectUrl = event.url.pathname == '/' ? '' : `?redirect=${event.url.pathname}`;
 		return redirect(302, `/login${redirectUrl}`);
 	}
@@ -26,5 +27,7 @@ export async function handle({ event, resolve }) {
 	event.locals.db = db;
 
 	const response = await resolve(event);
+	db.close();
+
 	return response;
 }

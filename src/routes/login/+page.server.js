@@ -19,23 +19,22 @@ export const actions = {
 		}
 
 		try {
-			let user = (await locals.db.select(`user:${data.username}`))[0];
-			if (user?.password !== data.password) {
+			let token = await locals.db.signin({
+				namespace: 'dev',
+				database: 'test',
+				scope: 'user',
+				username: data.username,
+				password: data.password
+			});
+
+			if (!token) {
 				errors.password = 'Invalid username or password';
 				errors.username = 'Invalid username or password';
 
 				return fail(401, { error: errors });
 			}
 
-			let sessionId = (
-				await locals.db.create(`session`, {
-					user: 'user:' + data.username
-				})
-			)[0];
-
-			console.log('sessionId', sessionId);
-
-			cookies.set('session', sessionId.id, { path: '/' });
+			cookies.set('session', token, { path: '/' });
 		} catch (e) {
 			return { error: e.message };
 		}
