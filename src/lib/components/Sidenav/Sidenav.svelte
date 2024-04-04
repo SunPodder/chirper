@@ -20,10 +20,10 @@
 </script>
 
 <ul class="p-6 flex flex-col gap-6 {className}">
-	<Item href="/" icon={home}>Home</Item>
-	<Item href="/search" icon={search}>Search</Item>
-	<Item href="/activity" icon={activity}>Activity</Item>
-	<Item href="/create" icon={create} onClick={showCreatePage}>Create Chirp</Item>
-	<Item href="/community" icon={communities}>Communities</Item>
-	<Item href="/@{$page.data.user.username}" icon={profile}>Profile</Item>
+	<Item href="/" icon={home} pattern={/^\/$/}>Home</Item>
+	<Item href="/search" icon={search} pattern={/^\/search$/}>Search</Item>
+	<Item href="/activity" icon={activity} pattern={/^\/activity$/}>Activity</Item>
+	<Item href="/create" icon={create} onClick={showCreatePage} pattern={/^\/create$/}>Create Chirp</Item>
+	<Item href="/community" icon={communities} pattern={/^\/community/}>Communities</Item>
+	<Item href="/@{$page.data.user.username}" icon={profile} pattern={new RegExp("^/@"+$page.data.user.username+"$")}>Profile</Item>
 </ul>
