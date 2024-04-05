@@ -65,7 +65,7 @@ DEFINE FIELD content ON chirp TYPE string
 DEFINE FIELD public ON chirp TYPE bool DEFAULT true
     PERMISSIONS FOR update WHERE $auth.id == author.id;
 DEFINE FIELD created_on ON chirp VALUE time::now() READONLY;
-DEFINE FIELD author ON chirp TYPE record<user> VALUE $auth.id DEFAULT $auth.id READONLY;
+DEFINE FIELD author ON chirp TYPE record<user> DEFAULT $auth.id READONLY;
 DEFINE FIELD likes ON chirp TYPE array<record<user>> DEFAULT [];
 DEFINE FIELD comments ON chirp FLEXIBLE TYPE array<object> DEFAULT [];
 
