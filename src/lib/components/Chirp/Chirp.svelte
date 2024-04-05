@@ -38,7 +38,7 @@
 					{chirp.content}
 				</div>
 			</a>
-			<ActionButtons onComment={() => (commentEnabled = !commentEnabled)} />
+			<ActionButtons onComment={() => (commentEnabled = !commentEnabled)} chirp={chirp} />
 		</div>
 	</div>
 
