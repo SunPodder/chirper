@@ -25,7 +25,7 @@
 			</div>
 			<div class="font-medium">123,456 members</div>
 
-			<div class="w-full max-w-4xl mt-8">
+			<div class="w-full max-w-4xl mt-8 rounded-lg bg-gray-500 bg-opacity-10 p-6">
 				<div class="flex gap-3">
 					<Avatar.Root class="w-14 h-14">
 						<Avatar.Image src={$page.data.user.avatar} alt={$page.data.user.username} />
@@ -38,7 +38,7 @@
 						on:focus="{showCreatePage}"
 					/>
 				</div>
-				<div class="flex mt-4 items-center gap-3">
+				<div class="flex mt-4 items-center gap-3 border-t border-gray-500 pt-5">
 					<button class="grow flex justify-center items-center gap-1">
 						<Icon icon="mdi:camera" class="w-7 h-7" />
 						Photo
