@@ -3,7 +3,11 @@ import { error } from '@sveltejs/kit';
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params, locals }) {
 	let user = (await locals.db.query(`SELECT * FROM user WHERE username = '${params.user}'`))[0][0];
-	let chirps = (await locals.db.query(`SELECT * FROM chirp WHERE author = ${user.id} FETCH author, comments.user`))[0];
+	let chirps = (
+		await locals.db.query(
+			`SELECT * FROM chirp WHERE author = ${user.id} FETCH author, comments.user`
+		)
+	)[0];
 
 	if (!user) {
 		error(404, `User does not exist!`);
@@ -15,10 +19,11 @@ export async function load({ params, locals }) {
 	};
 }
 
-
 export const actions = {
-	follow: async function({ locals, params }) {
-		let target = (await locals.db.query(`SELECT id, followers from user WHERE username = '${params.user}'`))[0][0];
+	follow: async function ({ locals, params }) {
+		let target = (
+			await locals.db.query(`SELECT id, followers from user WHERE username = '${params.user}'`)
+		)[0][0];
 
 		if (!target) {
 			error(404, `User does not exist!`);
@@ -40,7 +45,7 @@ export const actions = {
 		};
 	},
 
-	unfollow: async function({ locals, params }) {
+	unfollow: async function ({ locals, params }) {
 		let target = (await locals.db.select(`user:${params.user}`))[0];
 
 		if (!target) {
@@ -62,4 +67,4 @@ export const actions = {
 			body: { message: `You are no longer following ${target.name}` }
 		};
 	}
-}
+};

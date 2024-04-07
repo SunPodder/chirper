@@ -29,7 +29,7 @@ export const actions = {
 			bio: '',
 			followers: [],
 			following: [],
-			address: {},
+			address: {}
 		};
 
 		try {

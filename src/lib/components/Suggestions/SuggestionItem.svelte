@@ -12,7 +12,7 @@
 			<Avatar.Fallback>{data.name.slice(0, 2)}</Avatar.Fallback>
 		</Avatar.Root>
 	</div>
-	<a href="{type == 'user' ? `/@${data.username}` : `/community/${data.id}`}">
+	<a href={type == 'user' ? `/@${data.username}` : `/community/${data.id}`}>
 		<div>
 			<div class="font-bold">
 				{data.name}
@@ -23,6 +23,8 @@
 		</div>
 	</a>
 	<div class="ml-auto">
-		<button class="px-4 py-2 bg-violet-500 rounded-lg text-sm font-semibold"> {type == 'user' ? 'Follow' : 'Join'} </button>
+		<button class="px-4 py-2 bg-violet-500 rounded-lg text-sm font-semibold">
+			{type == 'user' ? 'Follow' : 'Join'}
+		</button>
 	</div>
 </div>

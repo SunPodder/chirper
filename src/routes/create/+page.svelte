@@ -12,7 +12,7 @@
 </svelte:head>
 
 <form method="POST" action="/create?/chirp" use:enhance class="w-full grid place-items-center">
-	<input type="hidden" name="redirect" value={$page.state.redirect}>
+	<input type="hidden" name="redirect" value={$page.state.redirect} />
 	<div class="w-full max-w-4xl">
 		<div class="flex">
 			<Avatar.Root class="w-14 h-14">

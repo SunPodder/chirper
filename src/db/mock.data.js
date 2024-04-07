@@ -28,11 +28,11 @@ async function createUsers(num) {
 					zip: faker.location.zipCode()
 				}
 			};
-	
+
 			data.name = data.first_name + ' ' + data.last_name;
 			data.avatar = `https://api.dicebear.com/7.x/lorelei/jpg?seed=user${data.username}`;
 			data.cover = `https://picsum.photos/seed/user${data.username}/800/300`;
-	
+
 			let user = await db.create(`user:${data.username}`, data);
 			console.info(`Created user ${i} with id ${user[0].id}`);
 		} catch (error) {
@@ -58,8 +58,8 @@ async function createChirps(num) {
 	}
 }
 
-async function createCommunities(num){
-	for(let i = 0; i < num; i++){
+async function createCommunities(num) {
+	for (let i = 0; i < num; i++) {
 		try {
 			let data = {
 				name: faker.company.name(),
@@ -67,10 +67,8 @@ async function createCommunities(num){
 				creator: `user:user${i}`,
 				members: [],
 				cover: `https://picsum.photos/seed/community${i}/800/300`,
-				chirps: [
-					`chirp:${i}`
-				]
-			}
+				chirps: [`chirp:${i}`]
+			};
 			let community = await db.create(`community:${i}`, data);
 			console.info(`Created community ${i} with id ${community[0].id}`);
 		} catch (error) {

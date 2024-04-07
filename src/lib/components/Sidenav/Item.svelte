@@ -8,7 +8,10 @@
 </script>
 
 <a {href} on:click={onClick} class="hover:bg-white/10 rounded-lg">
-	<li class="px-3 py-4 flex gap-4 rounded-lg cursor-pointer" class:active={$page.url.pathname.match(pattern)}>
+	<li
+		class="px-3 py-4 flex gap-4 rounded-lg cursor-pointer"
+		class:active={$page.url.pathname.match(pattern)}
+	>
 		<img src={icon} alt="" />
 		<span><slot /></span>
 	</li>

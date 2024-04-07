@@ -5,9 +5,9 @@
 	import * as Avatar from '$lib/components/ui/avatar';
 	import Icon from '@iconify/svelte';
 
-	async function showCreatePage(e){
+	async function showCreatePage(e) {
 		e.preventDefault();
-		pushState('/create', {create: true, redirect: $page.url.pathname});
+		pushState('/create', { create: true, redirect: $page.url.pathname });
 	}
 
 	export let data;
@@ -35,7 +35,7 @@
 						type="text"
 						placeholder="What's on your mind?"
 						class="block p-2.5 w-full rounded-3xl bg-gray-500 bg-opacity-30 focus:outline-none text-2xl pl-4"
-						on:focus="{showCreatePage}"
+						on:focus={showCreatePage}
 					/>
 				</div>
 				<div class="flex mt-4 items-center gap-3 border-t border-gray-500 pt-5">

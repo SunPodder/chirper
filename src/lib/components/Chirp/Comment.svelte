@@ -21,7 +21,7 @@
 			</Avatar.Root>
 		</div>
 		<div class="w-full">
-			<input type="hidden" name="chirpId" value={chirpId}>
+			<input type="hidden" name="chirpId" value={chirpId} />
 			<!-- svelte-ignore a11y-autofocus -->
 			<textarea
 				name="comment"

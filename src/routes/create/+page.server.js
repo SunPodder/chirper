@@ -8,7 +8,6 @@ export const actions = {
 			await locals.db.create('chirp', {
 				content: data.message
 			});
-
 		} catch (error) {
 			console.error(error);
 		}

@@ -38,7 +38,7 @@
 					{chirp.content}
 				</div>
 			</a>
-			<ActionButtons onComment={() => (commentEnabled = !commentEnabled)} chirp={chirp} />
+			<ActionButtons onComment={() => (commentEnabled = !commentEnabled)} {chirp} />
 		</div>
 	</div>
 
@@ -55,7 +55,8 @@
 		</div>
 		{#if chirp.comments.length > 0}
 			<div class="text-xs flex items-center text-gray-500 ml-4">
-				{chirp.comments.length} {chirp.comments.length === 1 ? 'reply' : 'replies'}
+				{chirp.comments.length}
+				{chirp.comments.length === 1 ? 'reply' : 'replies'}
 			</div>
 		{/if}
 	</div>
