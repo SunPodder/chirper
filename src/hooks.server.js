@@ -1,9 +1,12 @@
+import { env } from '$env/dynamic/private';
 import { redirect } from '@sveltejs/kit';
 import { Surreal } from 'surrealdb.js';
 
+const DATABASE_URL = env.DATABASE_URL || `http://127.0.0.1:8000/rpc`;
+
 export async function handle({ event, resolve }) {
 	const db = new Surreal();
-	await db.connect('http://127.0.0.1:8000/rpc', {
+	await db.connect(DATABASE_URL, {
 		namespace: 'dev',
 		database: 'test'
 	});
