@@ -3,6 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
+		"start": "node build/index.js",
 		"dev": "vite dev",
 		"db:start": "surreal start -u admin -p admin",
 		"db:docker": "docker run --rm --pull always -p 8000:8000 surrealdb/surrealdb:latest start",
@@ -19,6 +20,7 @@
 		"@faker-js/faker": "^8.4.1",
 		"@iconify/svelte": "^3.1.6",
 		"@sveltejs/adapter-auto": "^3.0.0",
+		"@sveltejs/adapter-node": "^5.0.1",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"autoprefixer": "^10.4.14",

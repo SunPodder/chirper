@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - '3000:3000'
+    environment:
+      - DATABASE_URL=http://db:8000/rpc
+      - ORIGIN=http://127.0.0.1:3000
+    depends_on:
+      - db
+  db:
+    image: surrealdb/surrealdb:latest
+    command: ["start", "-u", "admin", "-p", "admin", "--log", "warn", "--no-banner"]
+    ports:
+      - '8000:8000'
