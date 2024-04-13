@@ -3,8 +3,6 @@
 	import { page } from '$app/stores';
 	import * as Avatar from '$lib/components/ui/avatar';
 	import Icon from '@iconify/svelte';
-
-	export let data;
 </script>
 
 <svelte:head>

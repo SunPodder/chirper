@@ -1,9 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit';
 
-function generateId() {
-	return Math.random().toString(36).substring(2);
-}
-
 export const actions = {
 	default: async function ({ locals, request, cookies }) {
 		let data = Object.fromEntries(await request.formData());
@@ -40,13 +36,11 @@ export const actions = {
 				...data
 			});
 
-			let user = await locals.db.info();
-			if (!user) return { error: 'User already exists' };
-
+			if (!token) return { error: 'User already exists' };
 			cookies.set('session', token, { path: '/' });
 		} catch (e) {
 			console.log(e);
-			return { error: e.message };
+			fail(500, e.message);
 		}
 
 		redirect(303, '/');
